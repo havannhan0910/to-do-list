@@ -184,7 +184,7 @@ class _EditDialogState extends State<EditDialog> {
                   _keyDesc.currentState!.validate()) {
                 _editItem.editItem(
                     index,
-                    ToDoItem.fromData(
+                    ToDoItem(
                       id: _id,
                       time: _time,
                       title: _txtTitle.text.trim(),

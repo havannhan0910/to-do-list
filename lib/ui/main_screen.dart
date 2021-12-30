@@ -22,6 +22,14 @@ class _MainScreenState extends State<MainScreen> {
   //   _newItem.getData();
   // }
 
+  final _scrollController = ScrollController();
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent + 1);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -44,16 +52,19 @@ class _MainScreenState extends State<MainScreen> {
             return FutureBuilder<List<ToDoItem>>(
               future: _newItem.getData(),
               builder: (context, snapshot) {
-                return !snapshot.hasData
+                WidgetsBinding.instance!
+                    .addPostFrameCallback((_) => _scrollToBottom());
+
+                return _newItem.toDoItem.isEmpty
                     ? const EmptyScreen()
                     : Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: ListView.builder(
-                          physics: const BouncingScrollPhysics(
-                              parent: AlwaysScrollableScrollPhysics()),
+                          controller: _scrollController,
+                          physics: const BouncingScrollPhysics(),
                           reverse: true,
                           shrinkWrap: true,
-                          itemCount: _newItem.toDoItem.length,
+                          itemCount: snapshot.data!.length,
                           itemBuilder: (BuildContext context, int index) {
                             return GestureDetector(
                               child: Container(
@@ -62,7 +73,8 @@ class _MainScreenState extends State<MainScreen> {
                                 decoration: BoxDecoration(
                                   border: Border.all(color: Colors.white),
                                   borderRadius: const BorderRadius.all(
-                                      Radius.circular(15.0)),
+                                    Radius.circular(15.0),
+                                  ),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(0.4),
@@ -70,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
                                       blurRadius: 5,
                                       offset: const Offset(
                                           0, 1), // changes position of shadow
-                                    )
+                                    ),
                                   ],
                                 ),
                                 child: ListTile(
@@ -79,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Created: ${_newItem.toDoItem[index].date}",
+                                        "Created: ${snapshot.data![index].date}",
                                         style: const TextStyle(
                                             fontSize: 14,
                                             fontStyle: FontStyle.italic,
@@ -89,7 +101,7 @@ class _MainScreenState extends State<MainScreen> {
                                         height: 6,
                                       ),
                                       Text(
-                                        _newItem.toDoItem[index].title,
+                                        snapshot.data![index].title,
                                         style: const TextStyle(
                                           fontSize: 24,
                                           color: Colors.white,
@@ -101,7 +113,7 @@ class _MainScreenState extends State<MainScreen> {
                                       SizedBox(
                                         height: 100,
                                         child: Text(
-                                          _newItem.toDoItem[index].description,
+                                          snapshot.data![index].description,
                                           style: const TextStyle(
                                             fontSize: 18,
                                             color: Colors.white,
@@ -128,9 +140,8 @@ class _MainScreenState extends State<MainScreen> {
                                     MaterialPageRoute(builder: (_) {
                                   return EditDialog(
                                     index: index,
-                                    itemTitle: _newItem.toDoItem[index].title,
-                                    itemDesc:
-                                        _newItem.toDoItem[index].description,
+                                    itemTitle: snapshot.data![index].title,
+                                    itemDesc: snapshot.data![index].description,
                                   );
                                 }));
                               },

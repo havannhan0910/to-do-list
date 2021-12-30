@@ -115,7 +115,7 @@ class _AddDialogState extends State<AddDialog> {
         onPressed: () {
           if (_keyTitle.currentState!.validate() &&
               _keyDesc.currentState!.validate()) {
-            _addItem.addItem(ToDoItem.fromData(
+            _addItem.addItem(ToDoItem(
               id: id,
               time: id,
               title: _txtTitle.text.trim(),
