@@ -6,7 +6,7 @@ class ToDoItem {
   String title;
   String description;
 
-  ToDoItem({required this.id, required this.time, required this.title, required this.description});
+  ToDoItem.fromData({required this.id, required this.time, required this.title, required this.description});
 
   String get date {
     final date = DateTime.fromMillisecondsSinceEpoch(id);

@@ -46,7 +46,7 @@ class _EditDialogState extends State<EditDialog> {
   Widget build(BuildContext context) {
     final _editItem = Provider.of<Event>(context);
 
-    var _id = _editItem.toDoItem[index].id;
+    final _id = _editItem.toDoItem[index].id;
     var _time = _editItem.toDoItem[index].time;
 
     return Scaffold(
@@ -184,7 +184,7 @@ class _EditDialogState extends State<EditDialog> {
                   _keyDesc.currentState!.validate()) {
                 _editItem.editItem(
                     index,
-                    ToDoItem(
+                    ToDoItem.fromData(
                       id: _id,
                       time: _time,
                       title: _txtTitle.text.trim(),

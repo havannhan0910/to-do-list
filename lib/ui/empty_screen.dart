@@ -20,28 +20,6 @@ class EmptyScreen extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 80,
-                width: 80,
-              ),
-              Container(
-                margin: const EdgeInsets.all(40),
-                height: 120,
-                width: 120,
-                // child: const Text(
-                //   "Quay lại số cân như lúc này đi cân nặng ơi! ",
-                //   style: TextStyle(
-                //     fontSize: 18,
-                //     color: Colors.pinkAccent,
-                //   ),
-                // ),
-              ),
-            ],
-          ),
         ),
         Center(
           child: Column(

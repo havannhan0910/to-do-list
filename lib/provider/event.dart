@@ -6,18 +6,17 @@ class Event extends ChangeNotifier {
   List<ToDoItem> toDoItem = <ToDoItem>[];
   final ToDoDatabase _toDoDatabase = ToDoDatabase();
 
-  getData() async {
-    toDoItem = await _toDoDatabase.selectAll();
-    return toDoItem;
+  Future<List<ToDoItem>> getData() async {
+    return await _toDoDatabase.selectAll();
   }
 
-  Event() {
-    getData();
-  }
+  // Event() {
+  //   getData();
+  // }
 
   Future addItem(ToDoItem item) async {
     //add to database
-    _toDoDatabase.insertToDo(item) ;
+    await _toDoDatabase.insertToDo(item) ;
     toDoItem.add(item);
     notifyListeners();
     // _toDoDatabase.updateToDo(item);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/dialog/edit_dialog.dart';
+import 'package:todolist/models/todo_item.dart';
 import 'package:todolist/provider/event.dart';
 import 'package:todolist/img/random_image.dart';
 import 'package:todolist/dialog/delete_dialog.dart';
@@ -40,97 +41,103 @@ class _MainScreenState extends State<MainScreen> {
         ),
         Consumer<Event>(
           builder: (context, _newItem, child) {
-            return FutureBuilder(
+            return FutureBuilder<List<ToDoItem>>(
               future: _newItem.getData(),
               builder: (context, snapshot) {
-                if (_newItem.toDoItem.isEmpty) return const EmptyScreen();
-                return Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: ListView.builder(
-                    reverse: true,
-                    shrinkWrap: true,
-                    itemCount: _newItem.toDoItem.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(15.0)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.4),
-                                spreadRadius: 4,
-                                blurRadius: 10,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
-                              )
-                            ],
-                          ),
-                          child: ListTile(
-                            title: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Created: ${_newItem.toDoItem[index].date}",
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      fontStyle: FontStyle.italic,
-                                      color: Colors.white),
+                return !snapshot.hasData
+                    ? const EmptyScreen()
+                    : Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          reverse: true,
+                          shrinkWrap: true,
+                          itemCount: _newItem.toDoItem.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(15.0)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.4),
+                                      spreadRadius: 1,
+                                      blurRadius: 5,
+                                      offset: const Offset(
+                                          0, 1), // changes position of shadow
+                                    )
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 6,
-                                ),
-                                Text(
-                                  _newItem.toDoItem[index].title,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    color: Colors.white,
+                                child: ListTile(
+                                  title: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Created: ${_newItem.toDoItem[index].date}",
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            fontStyle: FontStyle.italic,
+                                            color: Colors.white),
+                                      ),
+                                      const SizedBox(
+                                        height: 6,
+                                      ),
+                                      Text(
+                                        _newItem.toDoItem[index].title,
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                        height: 100,
+                                        child: Text(
+                                          _newItem.toDoItem[index].description,
+                                          style: const TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
                                   ),
+                                  //Design Delete Widget
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  height: 100,
-                                  child: Text(
-                                    _newItem.toDoItem[index].description,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            //Design Delete Widget
-                          ),
-                        ),
-                        onLongPress: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return DeleteDialog(index: index);
-                            },
-                          );
-                        },
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) {
-                            return EditDialog(
-                              index: index,
-                              itemTitle: _newItem.toDoItem[index].title,
-                              itemDesc: _newItem.toDoItem[index].description,
+                              ),
+                              onLongPress: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return DeleteDialog(index: index);
+                                  },
+                                );
+                              },
+                              onTap: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (_) {
+                                  return EditDialog(
+                                    index: index,
+                                    itemTitle: _newItem.toDoItem[index].title,
+                                    itemDesc:
+                                        _newItem.toDoItem[index].description,
+                                  );
+                                }));
+                              },
                             );
-                          }));
-                        },
+                          },
+                        ),
                       );
-                    },
-                  ),
-                );
               },
             );
           },

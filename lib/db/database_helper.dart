@@ -24,7 +24,7 @@ class ToDoDatabase {
     final List<Map<String, dynamic>> maps = await db.query('todo');
 
     return List.generate(maps.length, (index) {
-      return ToDoItem(
+      return ToDoItem.fromData(
         id: maps[index]['id'],
         time: maps[index]['time'],
         title: maps[index]['title'],
