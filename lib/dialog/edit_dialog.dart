@@ -130,7 +130,7 @@ class _EditDialogState extends State<EditDialog> {
                       textCapitalization: TextCapitalization.sentences,
                       cursorColor: Colors.black,
                       cursorWidth: 2,
-                      maxLines: 23,
+                      maxLines: 2000,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
