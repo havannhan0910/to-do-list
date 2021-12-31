@@ -65,13 +65,15 @@ class _AddDialogState extends State<AddDialog> {
                       color: Colors.white,
                     ),
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.all(4),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
                       hintText: "Enter Title",
                       hintStyle:
                           const TextStyle(fontSize: 20, color: Colors.white),
+                      contentPadding: const EdgeInsets.all(4),
+                      fillColor: Colors.grey.withOpacity(0.2),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
@@ -105,6 +107,8 @@ class _AddDialogState extends State<AddDialog> {
                       hintText: "Enter descriptions",
                       hintStyle:
                           const TextStyle(fontSize: 16, color: Colors.white),
+                      fillColor: Colors.grey.withOpacity(0.2),
+                      filled: true,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
                     ),

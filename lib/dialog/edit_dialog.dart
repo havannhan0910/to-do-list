@@ -85,7 +85,6 @@ class _EditDialogState extends State<EditDialog> {
                 flex: 1,
                 child: Container(
                   padding: const EdgeInsets.all(12),
-                  // margin: const EdgeInsets.fromLTRB(12, 12, 12, 4),
                   child: Form(
                     key: _keyTitle,
                     child: TextFormField(
@@ -104,10 +103,12 @@ class _EditDialogState extends State<EditDialog> {
                         color: Colors.white,
                       ),
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.all(4),
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                         hintText: "Enter Title",
                         hintStyle: const TextStyle(fontSize: 16),
+                        contentPadding: const EdgeInsets.all(4),
+                        fillColor: Colors.grey.withOpacity(0.2),
+                        filled: true,
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
                   ),
@@ -134,13 +135,13 @@ class _EditDialogState extends State<EditDialog> {
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
-                        backgroundColor: Color.fromRGBO(
-                            29, 28, 28, 0.10196078431372549),
                       ),
                       // overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
                       decoration: InputDecoration(
                         hintText: "Enter descriptions",
+                        fillColor: Colors.grey.withOpacity(0.2),
+                        filled: true,
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
