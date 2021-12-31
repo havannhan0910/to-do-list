@@ -103,11 +103,11 @@ class _EditDialogState extends State<EditDialog> {
                         fontSize: 20,
                         color: Colors.white,
                       ),
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.all(4),
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(4),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                         hintText: "Enter Title",
-                        hintStyle: TextStyle(fontSize: 16),
+                        hintStyle: const TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
@@ -139,9 +139,9 @@ class _EditDialogState extends State<EditDialog> {
                       ),
                       // overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: "Enter descriptions",
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                     ),
                   ),
