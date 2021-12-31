@@ -40,13 +40,12 @@ class _AddDialogState extends State<AddDialog> {
         child: Column(
           children: [
             const SizedBox(
-              height: 28,
+              height: 32,
             ),
             Expanded(
               flex: 1,
               child: Container(
                 padding: const EdgeInsets.all(12),
-                // margin: const EdgeInsets.fromLTRB(12, 12, 12, 4),
                 child: Form(
                   //Title
                   key: _keyTitle,
@@ -68,7 +67,8 @@ class _AddDialogState extends State<AddDialog> {
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.all(4),
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       hintText: "Enter Title",
                       hintStyle:
                           const TextStyle(fontSize: 20, color: Colors.white),
@@ -112,6 +112,10 @@ class _AddDialogState extends State<AddDialog> {
                 ),
               ),
             ),
+            const Expanded(
+              flex: 1,
+              child: SizedBox(),
+            )
           ],
         ),
       ),

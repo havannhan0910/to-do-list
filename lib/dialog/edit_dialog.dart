@@ -135,7 +135,7 @@ class _EditDialogState extends State<EditDialog> {
                         fontSize: 16,
                         color: Colors.white,
                         backgroundColor: Color.fromRGBO(
-                            12, 12, 12, 0.10196078431372549),
+                            29, 28, 28, 0.10196078431372549),
                       ),
                       // overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
@@ -147,6 +147,10 @@ class _EditDialogState extends State<EditDialog> {
                   ),
                 ),
               ),
+              const Expanded(
+                flex: 1,
+                child: SizedBox(),
+              )
             ],
           ),
         ],

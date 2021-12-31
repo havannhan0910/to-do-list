@@ -81,7 +81,7 @@ class _MainScreenState extends State<MainScreen> {
                                       spreadRadius: 1,
                                       blurRadius: 5,
                                       offset: const Offset(
-                                          0, 1), // changes position of shadow
+                                          1, 1), // changes position of shadow
                                     ),
                                   ],
                                 ),
