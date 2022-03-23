@@ -16,8 +16,7 @@ class EditDialog extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<EditDialog> createState() =>
-      _EditDialogState(index, itemTitle, itemDesc);
+  State<EditDialog> createState() => _EditDialogState();
 }
 
 class _EditDialogState extends State<EditDialog> {
@@ -27,16 +26,10 @@ class _EditDialogState extends State<EditDialog> {
   final _keyTitle = GlobalKey<FormState>();
   final _keyDesc = GlobalKey<FormState>();
 
-  final int index;
-  final String itemTitle;
-  final String itemDesc;
-
-  _EditDialogState(this.index, this.itemTitle, this.itemDesc);
-
   @override
   void initState() {
-    _txtTitle.text = itemTitle;
-    _txtDesc.text = itemDesc;
+    _txtTitle.text = widget.itemTitle;
+    _txtDesc.text = widget.itemDesc;
     super.initState();
   }
 
@@ -46,8 +39,8 @@ class _EditDialogState extends State<EditDialog> {
   Widget build(BuildContext context) {
     final _editItem = Provider.of<Event>(context);
 
-    final _id = _editItem.toDoItem[index].id;
-    var _time = _editItem.toDoItem[index].time;
+    final _id = _editItem.toDoItem[widget.index].id;
+    var _time = _editItem.toDoItem[widget.index].time;
 
     return Scaffold(
       // appBar: AppBar(),
@@ -76,7 +69,7 @@ class _EditDialogState extends State<EditDialog> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 child: Text(
-                  "Last updated: ${_editItem.toDoItem[index].toDoTime}",
+                  "Last updated: ${_editItem.toDoItem[widget.index].toDoTime}",
                   style: const TextStyle(
                       fontSize: 12, fontStyle: FontStyle.italic),
                 ),
@@ -134,8 +127,8 @@ class _EditDialogState extends State<EditDialog> {
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
-                        backgroundColor: Color.fromRGBO(
-                            12, 12, 12, 0.10196078431372549),
+                        backgroundColor:
+                            Color.fromRGBO(12, 12, 12, 0.10196078431372549),
                       ),
                       // overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.justify,
@@ -157,7 +150,7 @@ class _EditDialogState extends State<EditDialog> {
           InkWell(
             splashColor: Colors.blueAccent,
             onLongPress: () {
-              _editItem.removeItem(_editItem.toDoItem[index]);
+              _editItem.removeItem(_editItem.toDoItem[widget.index]);
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("Deleted"),
@@ -183,7 +176,7 @@ class _EditDialogState extends State<EditDialog> {
               if (_keyTitle.currentState!.validate() &&
                   _keyDesc.currentState!.validate()) {
                 _editItem.editItem(
-                    index,
+                    widget.index,
                     ToDoItem(
                       id: _id,
                       time: _time,
