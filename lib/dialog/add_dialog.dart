@@ -40,13 +40,12 @@ class _AddDialogState extends State<AddDialog> {
         child: Column(
           children: [
             const SizedBox(
-              height: 28,
+              height: 32,
             ),
             Expanded(
               flex: 1,
               child: Container(
                 padding: const EdgeInsets.all(12),
-                // margin: const EdgeInsets.fromLTRB(12, 12, 12, 4),
                 child: Form(
                   //Title
                   key: _keyTitle,
@@ -65,11 +64,16 @@ class _AddDialogState extends State<AddDialog> {
                       fontSize: 20,
                       color: Colors.white,
                     ),
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.all(4),
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
                       hintText: "Enter Title",
-                      hintStyle: TextStyle(fontSize: 20, color: Colors.white),
+                      hintStyle:
+                          const TextStyle(fontSize: 20, color: Colors.white),
+                      contentPadding: const EdgeInsets.all(4),
+                      fillColor: Colors.grey.withOpacity(0.2),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
@@ -99,15 +103,23 @@ class _AddDialogState extends State<AddDialog> {
                       color: Colors.white,
                     ),
                     textAlign: TextAlign.justify,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       hintText: "Enter descriptions",
-                      hintStyle: TextStyle(fontSize: 16, color: Colors.white),
-                      border: OutlineInputBorder(),
+                      hintStyle:
+                          const TextStyle(fontSize: 16, color: Colors.white),
+                      fillColor: Colors.grey.withOpacity(0.2),
+                      filled: true,
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
                     ),
                   ),
                 ),
               ),
             ),
+            const Expanded(
+              flex: 1,
+              child: SizedBox(),
+            )
           ],
         ),
       ),

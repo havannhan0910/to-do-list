@@ -77,11 +77,11 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.withOpacity(0.4),
+                                      color: Colors.blueGrey.withOpacity(0.5),
                                       spreadRadius: 1,
                                       blurRadius: 5,
                                       offset: const Offset(
-                                          0, 1), // changes position of shadow
+                                          1, 1), // changes position of shadow
                                     ),
                                   ],
                                 ),
